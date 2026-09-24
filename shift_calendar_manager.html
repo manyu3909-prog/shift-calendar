@@ -196,16 +196,6 @@ dialog{width:min(94vw,520px);max-height:90vh;overflow:auto;border:0;border-radiu
 <div id="personalPrintArea" style="display:none"></div>
 
 <script>
-// 初期版のサンプルデータを残さないため、空の初期状態を用意
-try {
-  if (!localStorage.getItem('shift_calendar_initialized_v2')) {
-    localStorage.removeItem('shiftEmps');
-    localStorage.removeItem('shiftData');
-    localStorage.setItem('shift_calendar_initialized_v2','1');
-  }
-} catch(e) {}
-
-
 const defaultEmps=[];
 let emps=JSON.parse(localStorage.getItem("shiftEmps")||"null")||defaultEmps;
 while(emps.length<15) emps.push(["","",""]);
