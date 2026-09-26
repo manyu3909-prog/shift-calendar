@@ -16,10 +16,11 @@ button,select,input{font:inherit}button{border:1px solid #bbb;background:white;b
 .month{font-weight:700;font-size:18px;margin:auto}.wrap{max-width:1000px;margin:auto;padding:10px}
 .calendar{display:grid;grid-template-columns:1fr 1fr 1fr .45fr 1fr 1fr 1fr;gap:3px;background:#ddd;border:1px solid #ccc}
 .wday{background:#fafafa;text-align:center;padding:7px 2px;font-size:12px;font-weight:700}.cell{background:white;min-height:112px;padding:5px;cursor:pointer}.cell.empty{background:#eee;cursor:default}
-.date{font-weight:800;font-size:14px;margin-bottom:3px}.cell.red-date .date{color:#d00}.cell.red-date .weekday{color:#d00}.weekday{font-size:.78em;font-weight:700}.closed{font-size:11px;color:#777}.thu-attendees{font-size:10px;color:#1976d2;font-weight:700;margin:2px 0;line-height:1.2;white-space:normal}.thu-attendee{font-size:10px;color:#222;font-weight:700;margin:2px 0;line-height:1.2;white-space:nowrap}.shift{font-size:11px;line-height:1.35;padding:2px 3px;border-radius:4px;background:#f0f0f0;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.date{font-weight:800;font-size:14px;margin-bottom:3px}.cell.red-date .date{color:#d00}.cell.red-date .weekday{color:#d00}.weekday{font-size:.78em;font-weight:700}.closed{font-size:11px;color:#777}.thu-attendees{font-size:10px;color:#1976d2;font-weight:700;margin:2px 0;line-height:1.2;white-space:normal}.thu-attendee{font-size:11px;color:#222;font-weight:700;margin:2px 0;line-height:1.2;white-space:nowrap}
+.shift-break{height:18px;position:relative}.shift-break::after{content:"";position:absolute;left:4px;right:4px;top:50%;border-top:1px dashed #c8c8c8}.shift{font-size:11px;line-height:1.35;padding:2px 3px;border-radius:4px;background:#f0f0f0;margin:2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .more{font-size:10px;color:#666}.hint{font-size:12px;color:#666;margin:8px 0}
 dialog{width:min(94vw,520px);max-height:90vh;overflow:auto;border:0;border-radius:14px;padding:0;box-shadow:0 8px 30px #0003}.dlg{padding:16px}.dlg h2{margin:0 0 12px;font-size:19px}.row{display:flex;gap:6px;align-items:center;margin:7px 0}.row select{flex:1}.row input{width:105px}.actions{display:flex;justify-content:flex-end;gap:7px;margin-top:14px}
-.employee{background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0}.employee input{width:100%;padding:8px;border:1px solid #ccc;border-radius:7px}.empgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.employee{background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px;margin:8px 0}.employee input{width:100%;padding:8px;border:1px solid #ccc;border-radius:7px}.empgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.emp-actions{display:flex;justify-content:flex-end;gap:6px;margin-top:7px}.emp-save{background:#000;color:#fff;border:0;border-radius:7px;padding:6px 12px;font-size:13px}.emp-delete{background:#fff;color:#b00020;border:1px solid #b00020;border-radius:7px;padding:6px 12px;font-size:13px}
 @media(max-width:650px){.cell{min-height:90px}.shift{font-size:10px}.empgrid{grid-template-columns:1fr}.month{width:100%;text-align:center;order:-1}}
 .personal-calendar-title{text-align:center;font-weight:bold;font-size:18px;margin:10px 0}.personal-name{text-align:center;font-weight:800;font-size:24px;margin:8px 0 2px}.personal-month{text-align:center;font-weight:bold;font-size:16px;margin:0 0 10px}.personal-calendar{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid #999;border-left:1px solid #999}.personal-cal-head{text-align:center;font-weight:bold;padding:6px 2px;border-right:1px solid #999;border-bottom:1px solid #999}.personal-cal-cell{min-height:82px;padding:7px 5px;border-right:1px solid #999;border-bottom:1px solid #999;overflow-wrap:anywhere}.personal-cal-cell.empty{background:#fafafa}.personal-date{font-size:18px;font-weight:bold}.personal-date.sunday,.personal-date.holiday-date{color:#d00}.personal-date.saturday{color:#1976d2}.personal-time{margin-top:14px;font-size:16px;font-weight:bold;white-space:nowrap}.personal-holiday{margin-top:5px;font-size:12px}.personal-cal-cell.worked{font-weight:500}
 @media print{
@@ -29,10 +30,16 @@ dialog{width:min(94vw,520px);max-height:90vh;overflow:auto;border:0;border-radiu
  .date{font-size:12pt}.closed{font-size:9pt}.wday{font-size:10pt}
 }
 
-.staff-day{display:grid;grid-template-columns:38px 1fr 90px 90px;gap:5px;align-items:center;padding:7px 2px;border-bottom:1px solid #eee}
-.staff-day .date-label{font-weight:700}.staff-day input[type=time]{width:88px;padding:5px}.staff-day.closed-day{background:#f3f3f3}
+
+.bulk-shift-box{padding:8px;background:white;border:1px solid #e3e3e3;border-radius:8px}.bulk-shift-title{font-weight:700;margin-bottom:6px}.bulk-weekdays{display:flex;gap:5px;flex-wrap:wrap}.bulk-weekday{border:1px solid #bbb;background:#fff;border-radius:999px;padding:5px 10px;font-weight:700;cursor:pointer}.bulk-weekday.selected{background:#333;color:#fff;border-color:#333}.bulk-times{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;font-size:13px}.bulk-times input{width:88px;padding:5px}.bulk-times button{padding:6px 10px}.bulk-weekday.sun{color:#d00}.bulk-weekday.sat{color:#1976d2}.bulk-weekday.selected.sun,.bulk-weekday.selected.sat{color:#fff}
+.staff-day{display:grid;grid-template-columns:38px 1fr 90px 90px auto;gap:5px;align-items:center;padding:7px 2px;border-bottom:1px solid #eee}
+.staff-day .date-label{font-weight:700}.staff-day .date-label.staff-saturday{color:#1976d2}.staff-day .date-label.staff-red{color:#d00}.staff-day input[type=time]{width:88px;padding:5px}.staff-day.closed-day{background:#f3f3f3}
 .staff-day input[type=checkbox]{width:20px;height:20px}
-@media(max-width:650px){.staff-day{grid-template-columns:34px 1fr 82px 82px}.staff-day input[type=time]{width:80px}}
+.staff-day .sd-add2{font-size:11px;padding:3px 6px;line-height:1.2;white-space:nowrap;width:max-content;min-width:0}
+.staff-day .sd-second-label{grid-column:2;font-size:12px;color:#666}
+.staff-day .sd-start2{grid-column:3}.staff-day .sd-end2{grid-column:4}
+.staff-day .sd-remove2{grid-column:5;font-size:11px;padding:3px 6px;line-height:1.2;width:max-content;min-width:0}
+@media(max-width:650px){.staff-day{grid-template-columns:34px 1fr 82px 82px}.staff-day .sd-add2,.staff-day .sd-remove2{grid-column:2}.staff-day .sd-start2{grid-column:3}.staff-day .sd-end2{grid-column:4}.staff-day input[type=time]{width:80px}}
 
 #previewDlg{width:min(96vw,1100px);border:0;border-radius:16px;padding:0}
 #previewDlg::backdrop{background:rgba(0,0,0,.55)}
@@ -115,19 +122,22 @@ dialog{width:min(94vw,520px);max-height:90vh;overflow:auto;border:0;border-radiu
   .preview-page .mini-shift{font-size:11px!important;line-height:1.18!important;margin:0!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important;}
   .preview-page .mini-cell .holiday{font-size:10px!important;}
 }
+.save-toast{position:fixed;top:72px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:9px 16px;border-radius:20px;font-size:14px;font-weight:600;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .2s}
+.save-toast.show{opacity:1}
 </style>
 </head>
 <body>
+<div id="saveToast" class="save-toast">✓ 保存しました</div>
 <header class="no-print">
   <h1>📅 かんたんシフト</h1>
   <div class="bar">
-    <button onclick="prevMonth()">‹</button><div class="month" id="monthLabel"></div><button onclick="nextMonth()">›</button><button onclick="exportData()" title="シフトデータを保存">💾</button><button onclick="importData()" title="バックアップから復元">↥ 復元</button>
+    <button onclick="prevMonth()">‹</button><div class="month" id="monthLabel"></div><button onclick="nextMonth()">›</button><button onclick="exportData()" title="シフトデータをバックアップ保存">💾 バックアップ</button><button onclick="importData()" title="バックアップから復元">↥ 復元</button>
     <button class="primary" onclick="openEmployees()">👥 人の設定</button>
     <button onclick="openStaffSchedule()">📋 スタッフ別入力</button>
     <button onclick="printAll()">🖨 印刷</button>
   </div>
 </header>
-<div class="wrap"><div style="font-size:12px;color:#666;text-align:center;margin:2px 0 6px">過去のシフトは年月日ごとに保存されます。月を切り替えてもデータは消えません。</div>
+<div class="wrap"><div style="font-size:12px;color:#666;text-align:left;margin:2px 0 6px">過去のシフトは年月日ごとに保存されます。月を切り替えてもデータは消えません。</div>
   <div class="hint no-print">おすすめ：📋「スタッフ別入力」で勤務日をまとめて登録。カレンダーは自動で完成します。日付からの直接入力もできます。</div>
   <div id="calendar1" class="calendar"></div>
   <div class="no-print" style="height:12px"></div>
@@ -148,6 +158,20 @@ dialog{width:min(94vw,520px);max-height:90vh;overflow:auto;border:0;border-radiu
   <div class="row">
     <select id="staffScheduleSelect" onchange="renderStaffSchedule()"></select>
   </div>
+  <div id="staffBulkSettings" style="display:none;margin:10px 0;padding:10px;border:1px solid #ddd;border-radius:10px;background:#fafafa">
+    <div style="font-weight:700;margin-bottom:7px">曜日でまとめて設定</div>
+    <div class="bulk-shift-box">
+      <div class="bulk-shift-title">☀️ 昼勤務</div>
+      <div class="bulk-weekdays" id="bulkDayWeekdays"></div>
+      <div class="bulk-times"><label>開始 <input type="time" id="bulkDayStart"></label><label>終了 <input type="time" id="bulkDayEnd"></label><button type="button" class="primary bulk-apply-btn" onclick="applyBulkShift('day')">昼勤務を反映</button></div>
+    </div>
+    <div class="bulk-shift-box" style="margin-top:8px">
+      <div class="bulk-shift-title">🌙 夜勤務</div>
+      <div class="bulk-weekdays" id="bulkNightWeekdays"></div>
+      <div class="bulk-times"><label>開始 <input type="time" id="bulkNightStart"></label><label>終了 <input type="time" id="bulkNightEnd"></label><button type="button" class="primary bulk-apply-btn" onclick="applyBulkShift('night')">夜勤務を反映</button></div>
+    </div>
+    <div style="font-size:12px;color:#666;margin-top:6px">※曜日は複数選択できます。水・木の定休日も選択できます。</div>
+  </div>
   <div id="staffScheduleRows"></div>
   <div class="actions"><button onclick="staffDlg.close()">閉じる</button><button class="primary" onclick="saveStaffSchedule()">保存</button></div>
 </div></dialog>
@@ -156,7 +180,7 @@ dialog{width:min(94vw,520px);max-height:90vh;overflow:auto;border:0;border-radiu
   <h2>👥 人の設定</h2>
   <div class="hint">名前と「いつもの時間」を登録しておくと、毎回の入力がラクになります。</div>
   <div id="empRows"></div>
-  <div class="actions"><button onclick="empDlg.close()">閉じる</button><button class="primary" onclick="saveEmployees()">保存</button></div>
+  <div class="actions"><button onclick="empDlg.close()">閉じる</button></div>
 </div></dialog>
 
 
@@ -202,6 +226,7 @@ while(emps.length<15) emps.push(["","",""]);
 emps=emps.slice(0,15);
 let data=JSON.parse(localStorage.getItem("shiftData")||"{}");
 let cur=new Date(); cur.setDate(1);
+let deletedEmployeeNames=new Set();
 let staffEditing={};
 
 function key(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
@@ -258,7 +283,12 @@ function jpHolidaySet(year){
   return set;
 }
 function isJapaneseHoliday(dt){ return jpHolidaySet(dt.getFullYear()).has(key(dt)); }
-function save(){localStorage.setItem("shiftData",JSON.stringify(data));localStorage.setItem("shiftEmps",JSON.stringify(emps))}
+function save(){
+  localStorage.setItem("shiftData",JSON.stringify(data));
+  localStorage.setItem("shiftEmps",JSON.stringify(emps));
+  const toast=document.getElementById("saveToast");
+  if(toast){toast.classList.add("show");clearTimeout(window._saveToastTimer);window._saveToastTimer=setTimeout(()=>toast.classList.remove("show"),1800)}
+}
 function fmt(d){return `${d.getMonth()+1}/${d.getDate()}（${"日月火水木金土"[d.getDay()]}）`}
 function render(){
  document.getElementById("monthLabel").textContent=`${cur.getFullYear()}年${cur.getMonth()+1}月`;
@@ -274,25 +304,31 @@ function build(id,start,end){
    let e=document.createElement("div"); e.className="cell";
    if(n>last){e.classList.add("empty");el.appendChild(e);continue}
    let d=new Date(cur.getFullYear(),cur.getMonth(),n), k=key(d);
-   let shifts=data[k]||[];
+   let shifts=sortShiftsByTime(data[k]||[]);
    const isSun=d.getDay()===0, isHol=isJapaneseHoliday(d);
    if(isSun||isHol) e.classList.add("red-date");
    let closed=d.getDay()===3?"定休日":d.getDay()===4?"定休日":"";
    e.innerHTML=`<div class="date${d.getDay()===6?" saturday":""}">${n}（<span class="weekday">${"日月火水木金土"[d.getDay()]}</span>）</div>${closed?`<div class="closed ${d.getDay()===3?'wed-closed':'thu-closed'}">${closed}</div>`:""}`;
    if(d.getDay()===4){
-     shifts.forEach(s=>{
+     shifts.forEach((s,i)=>{
        let emp=emps.find(e=>e[0]===s.name);
        let st=normalizeTime(s.start || (emp?emp[1]:""));
        let en=normalizeTime(s.end || (emp?emp[2]:""));
+       if(timeMinutes(st)>=17*60 && (i===0 || timeMinutes(shifts[i-1].start)<17*60)){
+         let br=document.createElement("div");br.className="shift-break";e.appendChild(br);
+       }
        let x=document.createElement("div");x.className="thu-attendee";
        x.textContent=`${s.name} ${st}${st||en?"-":""}${en}`;
        e.appendChild(x);
      });
    }else{
-     shifts.forEach(s=>{
+     shifts.forEach((s,i)=>{
        let emp=emps.find(e=>e[0]===s.name);
        let st=normalizeTime(s.start || (emp?emp[1]:""));
        let en=normalizeTime(s.end || (emp?emp[2]:""));
+       if(timeMinutes(st)>=17*60 && (i===0 || timeMinutes(shifts[i-1].start)<17*60)){
+         let br=document.createElement("div");br.className="shift-break";e.appendChild(br);
+       }
        let x=document.createElement("div");x.className="shift";
        x.textContent=`${s.name} ${st}${st||en?"-":""}${en}`;e.appendChild(x);
      });
@@ -331,12 +367,81 @@ openDay=function(d){window._editingDayKey=key(d);_oldOpenDay(d)}
 
 function openEmployees(){
  const box=document.getElementById("empRows");box.innerHTML="";
- emps.forEach((e,i)=>{let d=document.createElement("div");d.className="employee";d.innerHTML=`<b>スタッフ${i+1}</b><div class="empgrid"><input class="en" value="${e[0]}" placeholder="名前"><input class="es" value="${e[1]}" placeholder="開始"><input class="ee" value="${e[2]}" placeholder="終了"></div>`;box.appendChild(d)});
+ while(emps.length<15)emps.push(["","",""]);
+ emps.slice(0,15).forEach((e,i)=>{
+   let d=document.createElement("div");d.className="employee";
+   d.innerHTML=`<b>スタッフ${i+1}</b><div class="empgrid"><input class="en" value="${e[0]||''}" placeholder="名前"><input class="es" value="${e[1]||''}" placeholder="開始"><input class="ee" value="${e[2]||''}" placeholder="終了"></div><div class="emp-actions"><button type="button" class="emp-save" onclick="saveOneEmployee(${i})">保存</button><button type="button" class="emp-delete" onclick="deleteEmployee(${i})">削除</button></div>`;
+   box.appendChild(d);
+ });
  empDlg.showModal();
 }
+function saveOneEmployee(i){
+ const rows=document.querySelectorAll(".employee");
+ const row=rows[i]; if(!row)return;
+ const n=row.querySelector(".en").value.trim();
+ const start=normalizeTime(row.querySelector(".es").value);
+ const end=normalizeTime(row.querySelector(".ee").value);
+ const oldName=emps[i]?.[0]||"";
+ if(!n){alert("名前を入力してください。");return;}
+ if(oldName && oldName!==n){
+   if(!confirm(`名前を「${oldName}」から「${n}」に変更しますか？\n\n今後のシフト入力では「${n}」が使われます。`)) return;
+ }
+ emps[i]=[n,start,end];
+ deletedEmployeeNames.delete(oldName);
+ save();
+ render();
+ setupPersonalPrint();
+ const toast=document.getElementById("saveToast");
+ if(toast){toast.textContent="✓ 保存しました";toast.classList.add("show");clearTimeout(window._saveToastTimer);window._saveToastTimer=setTimeout(()=>toast.classList.remove("show"),1800)}
+}
+
+function deleteEmployee(i){
+ const name=emps[i]?.[0];
+ if(!name){
+   const row=document.querySelectorAll(".employee")[i];
+   if(row){row.querySelector(".en").value='';row.querySelector(".es").value='';row.querySelector(".ee").value='';}
+   return;
+ }
+ const now=new Date();
+ const nextMonth=new Date(now.getFullYear(),now.getMonth()+1,1);
+ const ym=`${now.getFullYear()}年${now.getMonth()+1}月`;
+ if(!confirm(`「${name}」を人の設定から削除しますか？\n\n${ym}までのシフトは残し、来月以降の「${name}」のシフトは自動的に削除します。`)) return;
+ // 現在のスタッフ設定から即時削除
+ emps[i]=["","",""];
+ // 来月以降のシフトからも即時削除
+ const nextMonthKey=key(nextMonth);
+ for(const [dateKey,shifts] of Object.entries(data)){
+   if(dateKey>=nextMonthKey){
+     data[dateKey]=(shifts||[]).filter(s=>s.name!==name);
+     if(data[dateKey].length===0) delete data[dateKey];
+   }
+ }
+ save();
+ render();
+ setupPersonalPrint();
+ const rows=document.querySelectorAll(".employee");
+ const row=rows[i];
+ if(row){row.querySelector(".en").value='';row.querySelector(".es").value='';row.querySelector(".ee").value='';}
+ const toast=document.getElementById("saveToast");
+ if(toast){toast.textContent="✓ 削除しました";toast.classList.add("show");clearTimeout(window._saveToastTimer);window._saveToastTimer=setTimeout(()=>{toast.textContent="✓ 保存しました";toast.classList.remove("show")},1800)}
+}
 function saveEmployees(){
- let a=[];document.querySelectorAll(".employee").forEach(d=>{let n=d.querySelector(".en").value.trim(),s=normalizeTime(d.querySelector(".es").value),t=normalizeTime(d.querySelector(".ee").value);if(n)a.push([n,s,t])});
- while(a.length<15)a.push(["","",""]); emps=a.slice(0,15);save();empDlg.close();render();setupPersonalPrint();
+ let a=[];document.querySelectorAll(".employee").forEach(d=>{let n=d.querySelector(".en").value.trim(),s=normalizeTime(d.querySelector(".es").value),t=normalizeTime(d.querySelector(".ee").value);a.push(n?[n,s,t]:["","",""])});
+ while(a.length<15)a.push(["","",""]);
+ const finalNames=new Set(a.filter(e=>e[0]).map(e=>e[0]));
+ if(deletedEmployeeNames.size){
+   const now=new Date();
+   const nextMonthKey=key(new Date(now.getFullYear(),now.getMonth()+1,1));
+   for(const [dateKey,shifts] of Object.entries(data)){
+     if(dateKey>=nextMonthKey){
+       data[dateKey]=(shifts||[]).filter(s=>!deletedEmployeeNames.has(s.name) || finalNames.has(s.name));
+       if(data[dateKey].length===0) delete data[dateKey];
+     }
+   }
+ }
+ emps=a.slice(0,15);
+ deletedEmployeeNames.clear();
+ save();empDlg.close();render();setupPersonalPrint();
 }
 
 function openStaffSchedule(){
@@ -353,33 +458,193 @@ function normalizeTime(v){
   if(!m) return v;
   return String(Number(m[1])).padStart(2,"0")+":"+String(Number(m[2]||0)).padStart(2,"0");
 }
+function timeMinutes(v){
+  const n=normalizeTime(v);
+  const m=n.match(/^(\d{2}):(\d{2})$/);
+  return m ? Number(m[1])*60+Number(m[2]) : 9999;
+}
+function sortShiftsByTime(shifts){
+  return shifts.slice().sort((a,b)=>{
+    const startDiff=timeMinutes(a.start)-timeMinutes(b.start);
+    if(startDiff!==0) return startDiff;
+    return timeMinutes(a.end)-timeMinutes(b.end);
+  });
+}
+function toggleSecondShift(day, show){
+ const label=document.querySelector(`.sd-second-label[data-day="${day}"]`);
+ const st=document.querySelector(`.sd-start2[data-day="${day}"]`);
+ const en=document.querySelector(`.sd-end2[data-day="${day}"]`);
+ const btn=document.querySelector(`.sd-add2[data-day="${day}"]`);
+ const rm=document.querySelector(`.sd-remove2[data-day="${day}"]`);
+ const visible=show!==undefined ? show : (st?.style.display==='none');
+ [label,st,en,rm].forEach(el=>{if(el)el.style.display=visible?'':'none'});
+ if(btn)btn.style.display=visible?'none':'';
+ if(visible && st && en && !st.value && !en.value){
+   const idx=document.getElementById("staffScheduleSelect").value;
+   const emp=idx!==""?emps[Number(idx)]:null;
+   st.value=normalizeTime(emp?.[1]||''); en.value=normalizeTime(emp?.[2]||'');
+ }
+}
+function getBulkWeekdayPrefs(){
+ try{return JSON.parse(localStorage.getItem('shiftBulkWeekdayPrefs')||'{}')}catch(e){return {}}
+}
+function getBulkWeekdayPrefsKey(){
+ const idx=document.getElementById('staffScheduleSelect')?.value;
+ if(idx===undefined||idx==='')return '';
+ const emp=emps[Number(idx)];
+ if(!emp)return '';
+ return `${emp[0]}__${cur.getFullYear()}-${String(cur.getMonth()+1).padStart(2,'0')}`;
+}
+function saveBulkWeekdayPrefs(){
+ const key=getBulkWeekdayPrefsKey(); if(!key)return;
+ const prefs=getBulkWeekdayPrefs();
+ prefs[key]={
+   day:[...document.querySelectorAll('.bulk-weekday[data-mode="day"].selected')].map(b=>Number(b.dataset.dow)),
+   night:[...document.querySelectorAll('.bulk-weekday[data-mode="night"].selected')].map(b=>Number(b.dataset.dow))
+ };
+ localStorage.setItem('shiftBulkWeekdayPrefs',JSON.stringify(prefs));
+}
+function setupBulkWeekdayButtons(){
+ const labels=['日','月','火','水','木','金','土'];
+ const key=getBulkWeekdayPrefsKey();
+ const prefs=getBulkWeekdayPrefs()[key]||{day:[],night:[]};
+ ['Day','Night'].forEach(mode=>{
+   const box=document.getElementById(`bulk${mode}Weekdays`); if(!box)return;
+   const selected=prefs[mode.toLowerCase()]||[];
+   box.innerHTML=labels.map((label,dow)=>`<button type="button" class="bulk-weekday ${dow===0?'sun':''} ${dow===6?'sat':''} ${selected.includes(dow)?'selected':''}" data-mode="${mode.toLowerCase()}" data-dow="${dow}" onclick="toggleBulkWeekday(this)">${label}</button>`).join('');
+ });
+}
+function toggleBulkWeekday(btn){
+ btn.classList.toggle('selected');
+ saveBulkWeekdayPrefs();
+}
 function renderStaffSchedule(){
  const idx=document.getElementById("staffScheduleSelect").value;
  const box=document.getElementById("staffScheduleRows");
- if(idx===""){box.innerHTML='<div class="personal-empty">まずスタッフを選んでください。</div>';return}
+ const bulk=document.getElementById('staffBulkSettings');
+ if(idx===""){
+   box.innerHTML='<div class="personal-empty">まずスタッフを選んでください。</div>';
+   if(bulk)bulk.style.display='none';
+   return
+ }
+ if(bulk)bulk.style.display='block';
  const emp=emps[Number(idx)];
- // emp = [name, start, end]。設定画面の時間を必ず初期値として使う
  const defaultStart=normalizeTime(emp[1]);
  const defaultEnd=normalizeTime(emp[2]);
  staffEditing={idx:Number(idx), rows:[]};
+ setupBulkWeekdayButtons();
+ const staffHasTime=!!(defaultStart||defaultEnd);
+ const staffIsNight=defaultStart && timeMinutes(defaultStart)>=17*60;
+ document.getElementById('bulkDayStart').value=staffHasTime && !staffIsNight ? defaultStart : '10:00';
+ document.getElementById('bulkDayEnd').value=staffHasTime && !staffIsNight ? defaultEnd : '14:00';
+ document.getElementById('bulkNightStart').value=staffHasTime && staffIsNight ? defaultStart : '17:00';
+ document.getElementById('bulkNightEnd').value=staffHasTime && staffIsNight ? defaultEnd : '21:00';
  const last=new Date(cur.getFullYear(),cur.getMonth()+1,0).getDate();
- let h='<div class="staff-day" style="font-weight:700;border-bottom:2px solid #ccc"><span></span><span>日付</span><span>開始</span><span>終了</span></div>';
+ let h='<div class="staff-day" style="font-weight:700;border-bottom:2px solid #ccc"><span></span><span>日付</span><span>開始</span><span>終了</span><span></span></div>';
  for(let d=1;d<=last;d++){
    const dt=new Date(cur.getFullYear(),cur.getMonth(),d), k=key(dt), shifts=data[k]||[];
-   const found=shifts.find(s=>s.name===emp[0]);
+   const founds=shifts.filter(s=>s.name===emp[0]);
+   const found=founds[0];
+   const found2=founds[1];
    const checked=!!found;
    const start=found ? normalizeTime(found.start) : defaultStart;
    const end=found ? normalizeTime(found.end) : defaultEnd;
+   const start2=found2 ? normalizeTime(found2.start) : defaultStart;
+   const end2=found2 ? normalizeTime(found2.end) : defaultEnd;
+   const has2=!!found2;
    const cls=dt.getDay()===3?'closed-day':'';
+   const dayColorClass=dt.getDay()===6?'staff-saturday':(dt.getDay()===0||isJapaneseHoliday(dt))?'staff-red':'';
    h+=`<div class="staff-day ${cls}">
      <input type="checkbox" class="sd-check" data-day="${d}" ${checked?'checked':''}>
-     <span class="date-label">${d}日（${"日月火水木金土"[dt.getDay()]}）${dt.getDay()===3?' 定休':dt.getDay()===4?' 出勤あり':''}</span>
+     <span class="date-label ${dayColorClass}">${d}日（${"日月火水木金土"[dt.getDay()]}）${dt.getDay()===3?' 定休':dt.getDay()===4?' 出勤あり':''}</span>
      <input type="time" class="sd-start" data-day="${d}" value="${start}">
      <input type="time" class="sd-end" data-day="${d}" value="${end}">
+     <button type="button" class="sd-add2" data-day="${d}" onclick="toggleSecondShift(${d},true)" ${has2?'style="display:none"':''}>＋ 2回目</button>
+     <span class="sd-second-label" data-day="${d}" style="${has2?'':'display:none'}">2回目</span>
+     <input type="time" class="sd-start2" data-day="${d}" value="${start2}" style="${has2?'':'display:none'}">
+     <input type="time" class="sd-end2" data-day="${d}" value="${end2}" style="${has2?'':'display:none'}">
+     <button type="button" class="sd-remove2" data-day="${d}" onclick="toggleSecondShift(${d},false)" style="${has2?'':'display:none'}">削除</button>
    </div>`;
  }
  box.innerHTML=h;
 }
+function applyBulkShift(mode){
+ saveBulkWeekdayPrefs();
+ const dayStart=normalizeTime(document.getElementById('bulkDayStart').value||'10:00');
+ const dayEnd=normalizeTime(document.getElementById('bulkDayEnd').value||'14:00');
+ const nightStart=normalizeTime(document.getElementById('bulkNightStart').value||'17:00');
+ const nightEnd=normalizeTime(document.getElementById('bulkNightEnd').value||'21:00');
+ const selectedButtons=[...document.querySelectorAll(`.bulk-weekday[data-mode="${mode}"][data-dow]`)].filter(b=>b.classList.contains('selected'));
+ const dows=new Set(selectedButtons.map(b=>Number(b.dataset.dow)));
+ const idx=document.getElementById('staffScheduleSelect').value;
+ const emp=idx!==''?emps[Number(idx)]:null;
+ const staffStart=normalizeTime(emp?.[1]||'');
+ const staffEnd=normalizeTime(emp?.[2]||'');
+ const staffIsNight=staffStart && timeMinutes(staffStart)>=17*60;
+ const dayApplyStart=staffStart && !staffIsNight ? staffStart : dayStart;
+ const dayApplyEnd=staffEnd && !staffIsNight ? staffEnd : dayEnd;
+ const nightApplyStart=staffStart && staffIsNight ? staffStart : nightStart;
+ const nightApplyEnd=staffEnd && staffIsNight ? staffEnd : nightEnd;
+ const last=new Date(cur.getFullYear(),cur.getMonth()+1,0).getDate();
+ for(let d=1;d<=last;d++){
+   const dt=new Date(cur.getFullYear(),cur.getMonth(),d);
+   const inSelected=dows.has(dt.getDay());
+   const daySelected=[...document.querySelectorAll('.bulk-weekday[data-mode="day"].selected')].some(b=>Number(b.dataset.dow)===dt.getDay());
+   const nightSelected=[...document.querySelectorAll('.bulk-weekday[data-mode="night"].selected')].some(b=>Number(b.dataset.dow)===dt.getDay());
+   if(!inSelected && mode!=='day' && mode!=='night') continue;
+   const check=document.querySelector(`.sd-check[data-day="${d}"]`);
+   const st1=document.querySelector(`.sd-start[data-day="${d}"]`), en1=document.querySelector(`.sd-end[data-day="${d}"]`);
+   const st2=document.querySelector(`.sd-start2[data-day="${d}"]`), en2=document.querySelector(`.sd-end2[data-day="${d}"]`);
+   const add2=document.querySelector(`.sd-add2[data-day="${d}"]`);
+   const rm2=document.querySelector(`.sd-remove2[data-day="${d}"]`);
+   const label2=document.querySelector(`.sd-second-label[data-day="${d}"]`);
+   if(mode==='day' && !daySelected){
+     // 昼の曜日指定を外した日は、昼勤務だけ解除。夜勤務は残す。
+     if(nightSelected){
+       if(st1)st1.value=nightApplyStart||nightStart; if(en1)en1.value=nightApplyEnd||nightEnd;
+       if(st2)st2.value=''; if(en2)en2.value='';
+       if(st2)st2.style.display='none'; if(en2)en2.style.display='none';
+       if(label2)label2.style.display='none'; if(rm2)rm2.style.display='none'; if(add2)add2.style.display='';
+     } else if(check){
+       check.checked=false;
+       if(st1)st1.value=staffStart||dayStart; if(en1)en1.value=staffEnd||dayEnd;
+       if(st2)st2.value=''; if(en2)en2.value='';
+       if(st2)st2.style.display='none'; if(en2)en2.style.display='none';
+       if(label2)label2.style.display='none'; if(rm2)rm2.style.display='none'; if(add2)add2.style.display='';
+     }
+   } else if(mode==='night' && !nightSelected){
+     // 夜の曜日指定を外した日は、夜勤務だけ解除。昼勤務は残す。
+     if(daySelected){
+       if(st1)st1.value=dayApplyStart||dayStart; if(en1)en1.value=dayApplyEnd||dayEnd;
+       if(st2)st2.value=''; if(en2)en2.value='';
+       if(st2)st2.style.display='none'; if(en2)en2.style.display='none';
+       if(label2)label2.style.display='none'; if(rm2)rm2.style.display='none'; if(add2)add2.style.display='';
+     } else if(check){
+       check.checked=false;
+       if(st1)st1.value=staffStart||dayStart; if(en1)en1.value=staffEnd||dayEnd;
+       if(st2)st2.value=''; if(en2)en2.value='';
+       if(st2)st2.style.display='none'; if(en2)en2.style.display='none';
+       if(label2)label2.style.display='none'; if(rm2)rm2.style.display='none'; if(add2)add2.style.display='';
+     }
+   }
+   if(daySelected && nightSelected){
+     if(check)check.checked=true;
+     if(st1)st1.value=dayApplyStart||dayStart; if(en1)en1.value=dayApplyEnd||dayEnd;
+     if(st2 && st2.style.display==='none')toggleSecondShift(d,true);
+     const ns=document.querySelector(`.sd-start2[data-day="${d}"]`), ne=document.querySelector(`.sd-end2[data-day="${d}"]`);
+     if(ns)ns.value=nightApplyStart||nightStart; if(ne)ne.value=nightApplyEnd||nightEnd;
+   } else if(daySelected){
+     if(check)check.checked=true;
+     if(st1)st1.value=dayApplyStart||dayStart; if(en1)en1.value=dayApplyEnd||dayEnd;
+     if(st2 && st2.style.display!=='none')toggleSecondShift(d,false);
+   } else if(nightSelected){
+     if(check)check.checked=true;
+     if(st1)st1.value=nightApplyStart||nightStart; if(en1)en1.value=nightApplyEnd||nightEnd;
+     if(st2 && st2.style.display!=='none')toggleSecondShift(d,false);
+   }
+ }
+}
+
 function saveStaffSchedule(){
  const idx=document.getElementById("staffScheduleSelect").value;
  if(idx===""){alert("スタッフを選んでください");return}
@@ -388,9 +653,15 @@ function saveStaffSchedule(){
    const check=document.querySelector(`.sd-check[data-day="${d}"]`);
    const st=normalizeTime(document.querySelector(`.sd-start[data-day="${d}"]`)?.value||'');
    const en=normalizeTime(document.querySelector(`.sd-end[data-day="${d}"]`)?.value||'');
+   const st2=normalizeTime(document.querySelector(`.sd-start2[data-day="${d}"]`)?.value||'');
+   const en2=normalizeTime(document.querySelector(`.sd-end2[data-day="${d}"]`)?.value||'');
+   const secondVisible=document.querySelector(`.sd-start2[data-day="${d}"]`)?.style.display!=='none';
    const k=key(new Date(cur.getFullYear(),cur.getMonth(),d));
    let arr=(data[k]||[]).filter(s=>s.name!==emp[0]);
-   if(check?.checked) arr.push({name:emp[0],start:st,end:en});
+   if(check?.checked) {
+     arr.push({name:emp[0],start:st,end:en});
+     if(secondVisible && (st2||en2)) arr.push({name:emp[0],start:st2,end:en2});
+   }
    if(arr.length) data[k]=arr; else delete data[k];
  }
  save();staffDlg.close();render();renderPersonalPreview();
@@ -398,8 +669,12 @@ function saveStaffSchedule(){
 function exportData(){
   const payload={version:1,exportedAt:new Date().toISOString(),employees:emps,data:data};
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shift_calendar_backup.json';a.click();
+  const now=new Date();
+  const stamp=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-')+'_'+[String(now.getHours()).padStart(2,'0'),String(now.getMinutes()).padStart(2,'0'),String(now.getSeconds()).padStart(2,'0')].join('');
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='シフトバックアップ_'+stamp+'.json';a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  const toast=document.getElementById("saveToast");
+  if(toast){toast.textContent="✓ バックアップを保存しました";toast.classList.add("show");clearTimeout(window._saveToastTimer);window._saveToastTimer=setTimeout(()=>{toast.textContent="✓ 保存しました";toast.classList.remove("show")},1800)}
 }
 function importData(){
   const input=document.createElement('input');input.type='file';input.accept='.json,application/json';
@@ -429,12 +704,12 @@ function getPersonalCalendarHTML(emp){
  let html='<div class="personal-cal-head">日</div><div class="personal-cal-head">月</div><div class="personal-cal-head">火</div><div class="personal-cal-head">水</div><div class="personal-cal-head">木</div><div class="personal-cal-head">金</div><div class="personal-cal-head">土</div>';
  for(let i=0;i<firstDow;i++) html+='<div class="personal-cal-cell empty"></div>';
  for(let d=1;d<=last;d++){
-   const dt=new Date(y,m,d), found=(data[key(dt)]||[]).find(s=>s.name===emp[0]);
+   const dt=new Date(y,m,d), founds=sortShiftsByTime((data[key(dt)]||[]).filter(s=>s.name===emp[0]));
    const isSun=dt.getDay()===0, isHol=isJapaneseHoliday(dt);
     let body=`<div class="personal-date${isSun?' sunday':''}${isHol?' holiday-date':''}${dt.getDay()===6?' saturday':''}">${d}</div>`;
    if(dt.getDay()===3||dt.getDay()===4) body+=`<div class="personal-holiday ${dt.getDay()===3?'wed-holiday':'thu-holiday'}">定休日</div>`;
-   if(found){ const st=normalizeTime(found.start||emp[1]); const en=normalizeTime(found.end||emp[2]); body+=`<div class="personal-time">${st}${st||en?'-':''}${en}</div>`; }
-   html+=`<div class="personal-cal-cell${found?' worked':''}">${body}</div>`;
+   founds.forEach((found,i)=>{ const st=normalizeTime(found.start||emp[1]); const en=normalizeTime(found.end||emp[2]); body+=`<div class="personal-time">${st}${st||en?'-':''}${en}</div>`; });
+   html+=`<div class="personal-cal-cell${founds.length?' worked':''}">${body}</div>`;
  }
  return html;
 }
@@ -453,7 +728,7 @@ function printPersonal(){
  if(!w){alert('印刷画面を開けませんでした。ポップアップを許可してください。');return}
  const cal=getPersonalCalendarHTML(emp);
  w.document.write(`<html><head><title>${title} ${emp[0]} シフト</title><style>
- *{box-sizing:border-box}body{font-family:sans-serif;margin:0;padding:12mm}h1{font-size:24px;text-align:center;margin:0 0 5mm}.personal-calendar{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid #333;border-left:1px solid #333}.personal-cal-head{font-weight:bold;text-align:center;padding:4px;border-right:1px solid #333;border-bottom:1px solid #333}.personal-cal-cell{min-height:25mm;padding:2.5mm;border-right:1px solid #333;border-bottom:1px solid #333;overflow-wrap:anywhere}.personal-cal-cell.empty{background:#fafafa}.personal-date{font-size:18px;font-weight:bold}.personal-date.sunday,.personal-date.holiday-date{color:#d00}.personal-date.saturday{color:#1976d2}.personal-time{font-size:14pt;font-weight:bold;margin-top:6mm;white-space:nowrap}.personal-holiday{font-size:11pt;margin-top:2mm;color:#1976d2!important;white-space:nowrap}.personal-holiday.wed-holiday{writing-mode:vertical-rl!important}.personal-holiday.thu-holiday{writing-mode:horizontal-tb!important}.personal-calendar-title{text-align:center;font-size:20px;font-weight:bold;margin-bottom:4mm}.personal-name{text-align:center;font-size:26px;font-weight:800;margin:0 0 1mm}.personal-month{text-align:center;font-size:18px;font-weight:bold;margin:0 0 4mm}@page{size:A4 landscape;margin:5mm}
+ *{box-sizing:border-box}body{font-family:sans-serif;margin:0;padding:12mm}h1{font-size:24px;text-align:center;margin:0 0 5mm}.personal-calendar{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid #333;border-left:1px solid #333}.personal-cal-head{font-weight:bold;text-align:center;padding:4px;border-right:1px solid #333;border-bottom:1px solid #333}.personal-cal-cell{min-height:25mm;padding:2.5mm;border-right:1px solid #333;border-bottom:1px solid #333;overflow-wrap:anywhere}.personal-cal-cell.empty{background:#fafafa}.personal-date{font-size:18px;font-weight:bold}.personal-date.sunday,.personal-date.holiday-date{color:#d00}.personal-date.saturday{color:#1976d2}.personal-time{font-size:14pt;font-weight:bold;margin-top:6mm;white-space:nowrap}.personal-shift-break{height:9mm}.personal-holiday{font-size:11pt;margin-top:2mm;color:#1976d2!important;white-space:nowrap}.personal-holiday.wed-holiday{writing-mode:vertical-rl!important}.personal-holiday.thu-holiday{writing-mode:horizontal-tb!important}.personal-calendar-title{text-align:center;font-size:20px;font-weight:bold;margin-bottom:4mm}.personal-name{text-align:center;font-size:26px;font-weight:800;margin:0 0 1mm}.personal-month{text-align:center;font-size:18px;font-weight:bold;margin:0 0 4mm}@page{size:A4 landscape;margin:5mm}
 html,body{width:100%;height:auto} .personal-calendar{break-inside:avoid;page-break-inside:avoid} body{page-break-after:avoid} 
  
 
@@ -484,7 +759,7 @@ function printAll(){
       for(let dow=0;dow<7;dow++){
         const d=wi*7+dow-firstDow+1;
         if(d<1||d>last){cells.push('<div class="p-cell empty"></div>');continue}
-        const dt=new Date(y,m,d), shifts=data[key(dt)]||[];
+        const dt=new Date(y,m,d), shifts=sortShiftsByTime(data[key(dt)]||[]);
         const count=shifts.length;
         const isRed=dt.getDay()===0 || isJapaneseHoliday(dt); const isSat=dt.getDay()===6;
         // 人数が多い日だけ縮小。折り返しはしない。
@@ -498,13 +773,14 @@ function printAll(){
             const emp=emps.find(e=>e[0]===s.name);
             const st=normalizeTime(s.start||(emp?emp[1]:''));
             const en=normalizeTime(s.end||(emp?emp[2]:''));
-            html+=`<div class="p-thu-attendees" style="font-size:${Math.min(fs,10).toFixed(1)}pt">${escapeHtml(s.name)} ${st}${st||en?'-':''}${en}</div>`;
+            html+=`<div class="p-thu-attendees" style="font-size:${fs.toFixed(1)}pt">${escapeHtml(s.name)} ${st}${st||en?'-':''}${en}</div>`;
           });
         } else {
-          shifts.forEach(s=>{
+          shifts.forEach((s,i)=>{
             const emp=emps.find(e=>e[0]===s.name);
             const st=normalizeTime(s.start||(emp?emp[1]:''));
             const en=normalizeTime(s.end||(emp?emp[2]:''));
+            if(timeMinutes(st)>=17*60 && (i===0 || timeMinutes(shifts[i-1].start)<17*60)) html+='<div class="p-shift-break"></div>';
             html+=`<div class="p-shift" style="font-size:${fs.toFixed(1)}pt">${escapeHtml(s.name)} ${st}${st||en?'-':''}${en}</div>`;
           });
         }
@@ -527,7 +803,7 @@ function printAll(){
 .cal{display:grid;grid-template-columns:1fr 1fr 1fr .45fr 1fr 1fr 1fr;grid-template-rows:repeat(3,58mm);grid-auto-rows:58mm;gap:1px;width:100%;height:174mm}
 .p-cell{border:1px solid #999;padding:2.2mm;min-width:0;height:58mm;overflow:hidden;position:relative}
 .p-cell.empty{background:#f5f5f5}.p-date{font-weight:800;font-size:15pt;line-height:1.1;white-space:nowrap;margin-bottom:1.5mm}.p-date.red-date,.p-date.red-date span{color:#d00}.p-date.saturday,.p-date.saturday span{color:#1976d2}.p-date span{font-size:10pt;font-weight:700}
-.p-shift{font-weight:700;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:clip;margin:0.8mm 0}
+.p-shift-break{height:8mm;position:relative}.p-shift-break::after{content:"";position:absolute;left:2mm;right:2mm;top:50%;border-top:0.35mm dashed #c8c8c8}.p-shift{font-weight:700;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:clip;margin:0.8mm 0}
 .p-holiday{color:#1976d2;font-size:10pt;line-height:1.1;white-space:nowrap}.p-thu-attendees{color:#222;font-size:9pt;line-height:1.15;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:1mm}.p-holiday.wed{writing-mode:horizontal-tb;position:absolute;left:50%;top:18mm;transform:translateX(-50%)}.p-holiday.thu{writing-mode:horizontal-tb}
 </style></head><body>${pages}</body></html>`);
   w.document.close();w.focus();setTimeout(()=>w.print(),300);
