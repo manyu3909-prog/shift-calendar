@@ -762,7 +762,9 @@ function printAll(){
         const dt=new Date(y,m,d), shifts=sortShiftsByTime(data[key(dt)]||[]);
         const count=shifts.length;
         const isRed=dt.getDay()===0 || isJapaneseHoliday(dt); const isSat=dt.getDay()===6;
-        // 人数が多い日だけ縮小。折り返しはしない。
+        // 全体カレンダーは「名前＋勤務時間」が枠内に収まるよう、
+        // 標準を少し小さめにし、人数が多い日はさらに自動縮小。
+        // 折り返しはせず、余白を有効に使う。
         const fs=Math.max(8,14-Math.max(0,count-3)*1.15);
         let html=`<div class="p-cell"><div class="p-date${isRed?' red-date':''}${isSat?' saturday':''}">${d}<span>（${"日月火水木金土"[dow]}）</span></div>`;
         if(dow===3) {
@@ -796,15 +798,15 @@ function printAll(){
   if(!w){alert('印刷画面を開けませんでした。ポップアップを許可してください。');return}
   w.document.write(`<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>${y}年${m+1}月 シフト</title><style>
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;color:#222}
-@page{size:A4 landscape;margin:5mm}
-.page{width:287mm;height:200mm;padding:3mm;break-after:page;page-break-after:always;overflow:hidden}
+@page{size:A4 landscape;margin:2mm}
+.page{width:293mm;height:206mm;padding:3mm;break-after:page;page-break-after:always;overflow:hidden}
 .page:last-child{break-after:auto;page-break-after:auto}
 .page h1{text-align:center;font-size:18pt;margin:0 0 2mm;height:8mm;line-height:8mm}
 .cal{display:grid;grid-template-columns:1fr 1fr 1fr .45fr 1fr 1fr 1fr;grid-template-rows:repeat(3,58mm);grid-auto-rows:58mm;gap:1px;width:100%;height:174mm}
-.p-cell{border:1px solid #999;padding:2.2mm;min-width:0;height:58mm;overflow:hidden;position:relative}
+.p-cell{border:1px solid #999;padding:0.8mm;min-width:0;height:58mm;overflow:hidden;position:relative}
 .p-cell.empty{background:#f5f5f5}.p-date{font-weight:800;font-size:15pt;line-height:1.1;white-space:nowrap;margin-bottom:1.5mm}.p-date.red-date,.p-date.red-date span{color:#d00}.p-date.saturday,.p-date.saturday span{color:#1976d2}.p-date span{font-size:10pt;font-weight:700}
-.p-shift-break{height:8mm;position:relative}.p-shift-break::after{content:"";position:absolute;left:2mm;right:2mm;top:50%;border-top:0.35mm dashed #c8c8c8}.p-shift{font-weight:700;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:clip;margin:0.8mm 0}
-.p-holiday{color:#1976d2;font-size:10pt;line-height:1.1;white-space:nowrap}.p-thu-attendees{color:#222;font-size:9pt;line-height:1.15;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:1mm}.p-holiday.wed{writing-mode:horizontal-tb;position:absolute;left:50%;top:18mm;transform:translateX(-50%)}.p-holiday.thu{writing-mode:horizontal-tb}
+.p-shift-break{height:8mm;position:relative}.p-shift-break::after{content:"";position:absolute;left:1mm;right:1mm;top:50%;border-top:0.35mm dashed #c8c8c8}.p-shift{font-weight:700;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:clip;margin:0.6mm 0}
+.p-holiday{color:#1976d2;font-size:9pt;line-height:1.05;white-space:nowrap}.p-thu-attendees{color:#222;font-size:8.2pt;line-height:1.08;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:0.7mm}.p-holiday.wed{writing-mode:horizontal-tb;position:absolute;left:50%;top:18mm;transform:translateX(-50%)}.p-holiday.thu{writing-mode:horizontal-tb}
 </style></head><body>${pages}</body></html>`);
   w.document.close();w.focus();setTimeout(()=>w.print(),300);
 }
