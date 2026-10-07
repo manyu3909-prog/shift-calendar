@@ -762,9 +762,7 @@ function printAll(){
         const dt=new Date(y,m,d), shifts=sortShiftsByTime(data[key(dt)]||[]);
         const count=shifts.length;
         const isRed=dt.getDay()===0 || isJapaneseHoliday(dt); const isSat=dt.getDay()===6;
-        // 全体カレンダーは「名前＋勤務時間」が枠内に収まるよう、
-        // 標準を少し小さめにし、人数が多い日はさらに自動縮小。
-        // 折り返しはせず、余白を有効に使う。
+        // 人数が多い日だけ縮小。折り返しはしない。
         const fs=Math.max(8,14-Math.max(0,count-3)*1.15);
         let html=`<div class="p-cell"><div class="p-date${isRed?' red-date':''}${isSat?' saturday':''}">${d}<span>（${"日月火水木金土"[dow]}）</span></div>`;
         if(dow===3) {
@@ -775,7 +773,9 @@ function printAll(){
             const emp=emps.find(e=>e[0]===s.name);
             const st=normalizeTime(s.start||(emp?emp[1]:''));
             const en=normalizeTime(s.end||(emp?emp[2]:''));
-            html+=`<div class="p-thu-attendees" style="font-size:${fs.toFixed(1)}pt">${escapeHtml(s.name)} ${st}${st||en?'-':''}${en}</div>`;
+            const lineText=`${s.name} ${st}${st||en?'-':''}${en}`;
+            const lineFs=fitPrintFontSize(lineText,fs,34);
+            html+=`<div class="p-thu-attendees" style="font-size:${lineFs}pt">${escapeHtml(lineText)}</div>`;
           });
         } else {
           shifts.forEach((s,i)=>{
@@ -783,7 +783,9 @@ function printAll(){
             const st=normalizeTime(s.start||(emp?emp[1]:''));
             const en=normalizeTime(s.end||(emp?emp[2]:''));
             if(timeMinutes(st)>=17*60 && (i===0 || timeMinutes(shifts[i-1].start)<17*60)) html+='<div class="p-shift-break"></div>';
-            html+=`<div class="p-shift" style="font-size:${fs.toFixed(1)}pt">${escapeHtml(s.name)} ${st}${st||en?'-':''}${en}</div>`;
+            const lineText=`${s.name} ${st}${st||en?'-':''}${en}`;
+            const lineFs=fitPrintFontSize(lineText,fs,41);
+            html+=`<div class="p-shift" style="font-size:${lineFs}pt">${escapeHtml(lineText)}</div>`;
           });
         }
         html+='</div>'; cells.push(html);
@@ -799,16 +801,25 @@ function printAll(){
   w.document.write(`<!doctype html><html lang="ja"><head><meta charset="utf-8"><title>${y}年${m+1}月 シフト</title><style>
 *{box-sizing:border-box}html,body{margin:0;padding:0}body{font-family:system-ui,-apple-system,"Noto Sans JP",sans-serif;color:#222}
 @page{size:A4 landscape;margin:2mm}
-.page{width:293mm;height:206mm;padding:3mm;break-after:page;page-break-after:always;overflow:hidden}
+.page{width:293mm;height:206mm;padding:2mm;break-after:page;page-break-after:always;overflow:hidden}
 .page:last-child{break-after:auto;page-break-after:auto}
 .page h1{text-align:center;font-size:18pt;margin:0 0 2mm;height:8mm;line-height:8mm}
 .cal{display:grid;grid-template-columns:1fr 1fr 1fr .45fr 1fr 1fr 1fr;grid-template-rows:repeat(3,58mm);grid-auto-rows:58mm;gap:1px;width:100%;height:174mm}
 .p-cell{border:1px solid #999;padding:0.8mm;min-width:0;height:58mm;overflow:hidden;position:relative}
 .p-cell.empty{background:#f5f5f5}.p-date{font-weight:800;font-size:15pt;line-height:1.1;white-space:nowrap;margin-bottom:1.5mm}.p-date.red-date,.p-date.red-date span{color:#d00}.p-date.saturday,.p-date.saturday span{color:#1976d2}.p-date span{font-size:10pt;font-weight:700}
-.p-shift-break{height:8mm;position:relative}.p-shift-break::after{content:"";position:absolute;left:1mm;right:1mm;top:50%;border-top:0.35mm dashed #c8c8c8}.p-shift{font-weight:700;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:clip;margin:0.6mm 0}
-.p-holiday{color:#1976d2;font-size:9pt;line-height:1.05;white-space:nowrap}.p-thu-attendees{color:#222;font-size:8.2pt;line-height:1.08;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:0.7mm}.p-holiday.wed{writing-mode:horizontal-tb;position:absolute;left:50%;top:18mm;transform:translateX(-50%)}.p-holiday.thu{writing-mode:horizontal-tb}
+.p-shift-break{height:8mm;position:relative}.p-shift-break::after{content:"";position:absolute;left:2mm;right:2mm;top:50%;border-top:0.35mm dashed #c8c8c8}.p-shift{font-weight:700;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:clip;margin:0.8mm 0}
+.p-holiday{color:#1976d2;font-size:10pt;line-height:1.1;white-space:nowrap}.p-thu-attendees{color:#222;font-size:9pt;line-height:1.15;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:clip;margin-top:1mm}.p-holiday.wed{writing-mode:horizontal-tb;position:absolute;left:50%;top:18mm;transform:translateX(-50%)}.p-holiday.thu{writing-mode:horizontal-tb}
 </style></head><body>${pages}</body></html>`);
   w.document.close();w.focus();setTimeout(()=>w.print(),300);
+}
+function fitPrintFontSize(text, basePt, maxWidthMm){
+  // 基本14ptを維持し、セル幅に入らない長い行だけ縮小する。
+  // 印刷時の通常セル幅（約45mm）を基準に、余白分を引いた幅で判定。
+  const avgCharMm = 0.3528; // 1pt = 0.3528mm
+  const estimated = Array.from(String(text)).reduce((sum,ch)=>sum + (/[\u3000-\u9fff\u3040-\u30ff]/.test(ch) ? 1 : 0.58),0) * basePt * avgCharMm;
+  const available = Math.max(20, maxWidthMm);
+  if(estimated <= available) return basePt;
+  return Math.max(8, +(basePt * available / estimated).toFixed(1));
 }
 function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
